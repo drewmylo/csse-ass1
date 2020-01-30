@@ -1,0 +1,20 @@
+OPTS=-std=c99 --pedantic -Wall -Werror -g
+
+bark: main.o error.o utils.o game.o
+	gcc -o bark main.o error.o utils.o game.o -lm
+
+main.o: main.c error.h game.h
+	gcc $(OPTS) -c main.c
+
+error.o: error.c error.h
+	gcc $(OPTS) -c error.c
+
+utils.o: utils.c utils.h
+	gcc $(OPTS) -c utils.c
+
+game.o: game.c utils.h
+	gcc $(OPTS) -c game.c
+
+
+clean:
+	rm -f main.o error.o utils.o game.o bark
